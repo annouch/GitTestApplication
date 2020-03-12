@@ -13,6 +13,7 @@ public class GitTestApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println("This is a just a test !!");
 		
 		
 	}

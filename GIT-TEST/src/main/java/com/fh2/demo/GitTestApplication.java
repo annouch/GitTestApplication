@@ -11,12 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GitTestApplication implements CommandLineRunner{
 	
-	public static String[] uniqueNames(String[] names1, String[] names2) {
-          
-        Set<String> result = new HashSet<>(Arrays.asList(names1));
-        result.addAll(Arrays.asList(names2));
-		return result.toArray(new String[0]);
-    }
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(GitTestApplication.class, args);
@@ -27,11 +22,39 @@ public class GitTestApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		System.out.println("This is a just a test !!");
 		
-		
-		
-		String[] names1 = new String[] {"Ava", "Emma", "Olivia"};
-        String[] names2 = new String[] {"Olivia", "Sophia", "Emma"};
-        System.out.println(String.join(", ", uniqueNames(names1, names2))); // should print Ava, Emma, Olivia, Sophia
+		Node n1 = new Node(1, null, null);
+        Node n3 = new Node(3, null, null);
+        Node n2 = new Node(2, n1, n3);
+        
+        System.out.println(BinarySearchTree.contains(n3, 3));
 	}
 
+}
+
+ class BinarySearchTree {
+    public static boolean contains(Node root, int value) {
+    	
+    	  if (root==null) {
+    		  return false ;
+    	  }
+    	  
+    	  if (root.value == value)
+              return true;
+    	  else if (root.value>value) 
+    		  return contains(root.left, value) ;
+    	  else 
+    		  return contains(root.right, value);
+			
+    }
+ }
+    
+class Node {
+    public int value;
+    public Node left, right;
+
+    public Node(int value, Node left, Node right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
 }

@@ -21,40 +21,46 @@ public class GitTestApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("This is a just a test !!");
+		TextInput input = new NumericInput();
+		input.add('1');
+		input.add('a');
+		input.add('0');
+		System.out.println(input.getValue());
 		
-		Node n1 = new Node(1, null, null);
-        Node n3 = new Node(3, null, null);
-        Node n2 = new Node(2, n1, n3);
-        
-        System.out.println(BinarySearchTree.contains(n3, 3));
+	}
+	
+	public static class TextInput {
+		
+		protected StringBuilder ch;
+		public  void add(char c) {
+			this.ch.append(c);
+		}
+		
+		public TextInput() {
+			ch=new StringBuilder();
+		}
+		
+		
+		public String getValue() {
+			
+			return this.ch.toString();
+		}
 	}
 
-}
-
- class BinarySearchTree {
-    public static boolean contains(Node root, int value) {
+    public static class NumericInput extends TextInput{
     	
-    	  if (root==null) {
-    		  return false ;
-    	  }
-    	  
-    	  if (root.value == value)
-              return true;
-    	  else if (root.value>value) 
-    		  return contains(root.left, value) ;
-    	  else 
-    		  return contains(root.right, value);
-			
+    	public NumericInput() {
+    		super();
+    	}
+    	
+    	@Override
+    	public  void add(char c) {
+			if(Character.isDigit(c)) {
+				this.ch.append(c);
+			}
+		}
     }
- }
-    
-class Node {
-    public int value;
-    public Node left, right;
 
-    public Node(int value, Node left, Node right) {
-        this.value = value;
-        this.left = left;
-        this.right = right;
-    }
 }
+
+ 

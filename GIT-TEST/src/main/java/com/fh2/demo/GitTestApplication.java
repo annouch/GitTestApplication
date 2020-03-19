@@ -11,7 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GitTestApplication implements CommandLineRunner{
 	
-
+	public static int countNumbers(int[] sortedArray, int lessThan) {
+		int count =0;
+		if (sortedArray==null || lessThan<=0) {
+			return 0;
+		}
+		for (int i = 0; i < sortedArray.length; i++) {
+			if(sortedArray[i] < 4) {
+				count=count+1;
+			}
+		}
+		return count;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(GitTestApplication.class, args);
@@ -21,45 +32,15 @@ public class GitTestApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("This is a just a test !!");
-		TextInput input = new NumericInput();
-		input.add('1');
-		input.add('a');
-		input.add('0');
-		System.out.println(input.getValue());
+        System.out.println(countNumbers(new int[] { 1, 3, 3, 7 }, 4));
+
+		
 		
 	}
 	
-	public static class TextInput {
-		
-		protected StringBuilder ch;
-		public  void add(char c) {
-			this.ch.append(c);
-		}
-		
-		public TextInput() {
-			ch=new StringBuilder();
-		}
-		
-		
-		public String getValue() {
-			
-			return this.ch.toString();
-		}
-	}
+	
 
-    public static class NumericInput extends TextInput{
-    	
-    	public NumericInput() {
-    		super();
-    	}
-    	
-    	@Override
-    	public  void add(char c) {
-			if(Character.isDigit(c)) {
-				this.ch.append(c);
-			}
-		}
-    }
+    
 
 }
 
